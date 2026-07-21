@@ -149,7 +149,7 @@ export const DeliveryPrediction = () => {
     };
 
     try {
-      const response = await axios.post('http://https://smart-logistics-backend-mefz.onrender.com/api/predict', payload);
+      const response = await axios.post('https://smart-logistics-backend-mefz.onrender.com/api/predict', payload);
       if (response.data && response.data.success) {
         setPredictionResult(response.data);
       } else {

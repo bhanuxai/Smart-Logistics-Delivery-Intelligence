@@ -133,7 +133,7 @@ export const DemandForecasting = () => {
     console.log("Request payload:", payload);
 
     try {
-      const response = await axios.post('http://https://smart-logistics-backend-mefz.onrender.com/api/forecast', payload);
+      const response = await axios.post('https://smart-logistics-backend-mefz.onrender.com/api/forecast', payload);
       console.log("Response data:", response.data);
 
       if (response.data && response.data.success) {

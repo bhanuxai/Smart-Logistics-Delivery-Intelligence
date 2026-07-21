@@ -163,7 +163,7 @@ export const Dashboard = () => {
         apiService.getPaymentMethods(),
         apiService.getReviewDistribution(),
         apiService.getSalesByState(),
-        axios.get("http://https://smart-logistics-backend-mefz.onrender.com/api/insights")
+        axios.get("https://smart-logistics-backend-mefz.onrender.com/api/insights")
       ]);
 
       setKpiData(dashboardRes);

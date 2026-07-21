@@ -63,7 +63,7 @@ export const RouteOptimization = () => {
     }
 
     try {
-      const response = await axios.post('http://https://smart-logistics-backend-mefz.onrender.com/api/route-optimization', {
+      const response = await axios.post('https://smart-logistics-backend-mefz.onrender.com/api/route-optimization', {
         start: startNode,
         destination: destNode
       });
