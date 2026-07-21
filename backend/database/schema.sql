@@ -1,17 +1,15 @@
--- ===========================================
+
 -- Smart Logistics & Delivery Intelligence Platform
 -- Database Schema
 -- Team: Gradient Gurus
--- ===========================================
+
 SET FOREIGN_KEY_CHECKS = 0;
 DROP DATABASE IF EXISTS smart_logistics_db;
 CREATE DATABASE smart_logistics_db;
 
 USE smart_logistics_db;
 
--- ===========================================
 -- CUSTOMERS
--- ===========================================
 
 CREATE TABLE customers (
     customer_id VARCHAR(50) PRIMARY KEY,
@@ -21,9 +19,8 @@ CREATE TABLE customers (
     customer_state VARCHAR(5)
 );
 
--- ===========================================
+
 -- SELLERS
--- ===========================================
 
 CREATE TABLE sellers (
     seller_id VARCHAR(50) PRIMARY KEY,
@@ -32,19 +29,17 @@ CREATE TABLE sellers (
     seller_state VARCHAR(5)
 );
 
--- ===========================================
+
 -- PRODUCT CATEGORIES
--- ===========================================
+
 
 CREATE TABLE product_categories (
     product_category_name VARCHAR(100) PRIMARY KEY,
     product_category_name_english VARCHAR(100)
 );
 
--- ===========================================
--- PRODUCTS
--- ===========================================
 
+-- PRODUCTS
 CREATE TABLE products (
     product_id VARCHAR(50) PRIMARY KEY,
     product_category_name VARCHAR(100),
@@ -60,9 +55,8 @@ CREATE TABLE products (
         REFERENCES product_categories(product_category_name)
 );
 
--- ===========================================
+
 -- ORDERS
--- ===========================================
 
 CREATE TABLE orders (
     order_id VARCHAR(50) PRIMARY KEY,
@@ -79,9 +73,8 @@ CREATE TABLE orders (
         REFERENCES customers(customer_id)
 );
 
--- ===========================================
+
 -- ORDER ITEMS
--- ===========================================
 
 CREATE TABLE order_items (
     order_id VARCHAR(50),
@@ -106,9 +99,9 @@ CREATE TABLE order_items (
         REFERENCES sellers(seller_id)
 );
 
--- ===========================================
+
 -- PAYMENTS
--- ===========================================
+
 
 CREATE TABLE payments (
     order_id VARCHAR(50),
@@ -124,9 +117,7 @@ CREATE TABLE payments (
         REFERENCES orders(order_id)
 );
 
--- ===========================================
 -- REVIEWS
--- ===========================================
 
 CREATE TABLE reviews (
     review_id VARCHAR(50),
@@ -145,9 +136,7 @@ CREATE TABLE reviews (
         REFERENCES orders(order_id)
 );
 
--- ===========================================
 -- GEOLOCATION
--- ===========================================
 
 CREATE TABLE geolocation (
     geolocation_zip_code_prefix INT,
