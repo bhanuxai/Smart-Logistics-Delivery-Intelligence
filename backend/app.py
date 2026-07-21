@@ -14,6 +14,20 @@ app = Flask(__name__)
 
 CORS(app)
 
+
+from datetime import datetime
+
+@app.route("/")
+def home():
+    return {
+        "status": "healthy",
+        "service": "Smart Logistics & Delivery Intelligence Platform",
+        "version": "1.0.0",
+        "message": "Backend is running successfully.",
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "api": "/api"
+    }, 200
+
 app.register_blueprint(dashboard_bp, url_prefix="/api")
 app.register_blueprint(analytics_bp, url_prefix="/api")
 app.register_blueprint(ai_bp, url_prefix="/api")
