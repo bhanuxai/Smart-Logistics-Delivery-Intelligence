@@ -136,7 +136,7 @@ export const InventoryIntelligence = () => {
     console.log("Request payload:", payload);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/inventory', payload);
+      const response = await axios.post('http://https://smart-logistics-backend-mefz.onrender.com/api/inventory', payload);
       console.log("Response data:", response.data);
 
       if (response.data && response.data.success) {

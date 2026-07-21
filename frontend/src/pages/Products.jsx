@@ -133,7 +133,7 @@ export const Products = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get('http://127.0.0.1:5000/api/products', {
+      const response = await axios.get('http://https://smart-logistics-backend-mefz.onrender.com/api/products', {
         params: {
           page,
           limit,

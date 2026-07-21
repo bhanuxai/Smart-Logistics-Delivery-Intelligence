@@ -52,7 +52,7 @@ export const AIInsightsHub = () => {
     setChatLoading(true);
 
     try {
-      const res = await axios.post('http://127.0.0.1:5000/api/chat', { message: textToSend });
+      const res = await axios.post('http://https://smart-logistics-backend-mefz.onrender.com/api/chat', { message: textToSend });
       setChatHistory([...updatedHistory, { role: 'assistant', content: res.data.reply }]);
     } catch (err) {
       console.error('Chat error:', err);
@@ -69,7 +69,7 @@ export const AIInsightsHub = () => {
     setOptResult('');
 
     try {
-      const res = await axios.get(`http://127.0.0.1:5000/api/optimize?type=${type}`);
+      const res = await axios.get(`http://https://smart-logistics-backend-mefz.onrender.com/api/optimize?type=${type}`);
       setOptResult(res.data.recommendation);
     } catch (err) {
       console.error('Optimization error:', err);
@@ -90,7 +90,7 @@ export const AIInsightsHub = () => {
     setDiagnosticsResult(null);
 
     try {
-      const res = await axios.get(`http://127.0.0.1:5000/api/delay-explanation?order_id=${idToSearch}`);
+      const res = await axios.get(`http://https://smart-logistics-backend-mefz.onrender.com/api/delay-explanation?order_id=${idToSearch}`);
       setDiagnosticsResult(res.data);
     } catch (err) {
       console.error('Diagnostics error:', err);
@@ -110,7 +110,7 @@ export const AIInsightsHub = () => {
     setReportResult('');
 
     try {
-      const res = await axios.get('http://127.0.0.1:5000/api/generate-report');
+      const res = await axios.get('http://https://smart-logistics-backend-mefz.onrender.com/api/generate-report');
       setReportResult(res.data.report);
     } catch (err) {
       console.error('Report error:', err);

@@ -127,7 +127,7 @@ export const Sellers = () => {
     setLoading(true);
     setError('');
     try {
-      const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api';
+      const apiBase = import.meta.env.VITE_API_URL || 'http://https://smart-logistics-backend-mefz.onrender.com/api';
       const response = await axios.get(`${apiBase}/sellers`, {
         params: {
           page,
