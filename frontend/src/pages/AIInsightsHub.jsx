@@ -121,27 +121,27 @@ export const AIInsightsHub = () => {
   };
 
   return (
-    <div className="flex-1 p-6 overflow-y-auto space-y-6 bg-transparent relative z-10">
+    <div className="flex-1 p-3 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6 bg-transparent relative z-10">
       
       {/* Title Header */}
-      <div className="flex justify-between items-center border-b-3 border-black pb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-3 border-black pb-3 sm:pb-4 gap-2 sm:gap-4">
         <div>
-          <span className="text-[9px] bg-[#C7D2FE] text-black border-2 border-black px-2 py-0.5 rounded font-black uppercase tracking-wider mb-2 inline-block">AI Decision Hub</span>
-          <h2 className="text-xl font-black text-black uppercase tracking-tight">Logix-AI Operations Command Hub</h2>
+          <span className="text-[8px] sm:text-[9px] bg-[#C7D2FE] text-black border-2 border-black px-2 py-0.5 rounded font-black uppercase tracking-wider mb-1 sm:mb-2 inline-block">AI Decision Hub</span>
+          <h2 className="text-lg sm:text-xl font-black text-black uppercase tracking-tight">Logix-AI Operations Command Hub</h2>
         </div>
-        <div className="flex items-center gap-2 bg-[#FF9900] border-3 border-black px-3.5 py-2 rounded-xl text-xs text-black font-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-          <FaBrain className="text-black text-sm animate-pulse" />
+        <div className="flex items-center gap-2 bg-[#FF9900] border-2 sm:border-3 border-black px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[10px] sm:text-xs text-black font-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] sm:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+          <FaBrain className="text-black text-xs sm:text-sm animate-pulse shrink-0" />
           <span>Interactive AI Services Online</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         
         {/* ==================== LEFT COLUMN ==================== */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           
           {/* Chatbot Card */}
-          <div className="glass-panel p-6 rounded-xl border-3 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-white flex flex-col h-[480px]">
+          <div className="glass-panel p-4 sm:p-6 rounded-xl border-3 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-white flex flex-col h-[440px] sm:h-[480px]">
             <div className="flex items-center gap-3 border-b-2 border-black pb-3 mb-3">
               <div className="p-2 bg-[#C7D2FE] border border-black rounded-lg text-black">
                 <FaComments className="text-sm" />

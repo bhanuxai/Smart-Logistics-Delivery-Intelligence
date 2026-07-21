@@ -207,8 +207,8 @@ export const DeliveryPrediction = () => {
       )}
 
       {/* Prediction Form */}
-      <form onSubmit={handlePredict} className="space-y-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <form onSubmit={handlePredict} className="space-y-4 sm:space-y-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3.5">
           
           {/* Customer State */}
           <div className="flex flex-col gap-1.5">
@@ -339,22 +339,22 @@ export const DeliveryPrediction = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="mt-6 border-3 border-black rounded-2xl p-5 bg-[#FAF6EE] shadow-[3px_3px_0px_rgba(0,0,0,1)] grid grid-cols-1 sm:grid-cols-2 gap-4"
+            className="mt-6 border-3 border-black rounded-2xl p-4 sm:p-5 bg-[#FAF6EE] shadow-[3px_3px_0px_rgba(0,0,0,1)] grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {/* Predicted Days Card */}
-            <div className="bg-white border-2 border-black p-4 rounded-xl flex items-center gap-4 shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-              <div className="w-10 h-10 rounded-lg bg-[#C7D2FE] border border-black flex items-center justify-center text-black font-black text-lg">
+            <div className="bg-white border-2 border-black p-3.5 sm:p-4 rounded-xl flex items-center gap-3 sm:gap-4 shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+              <div className="w-10 h-10 rounded-lg bg-[#C7D2FE] border border-black flex items-center justify-center text-black font-black text-lg shrink-0">
                 📦
               </div>
               <div>
                 <span className="text-[9px] font-black uppercase text-slate-500 block mb-0.5">Estimated Delivery</span>
-                <span className="text-xl font-black text-black">{predictionResult.predicted_days} Days</span>
+                <span className="text-lg sm:text-xl font-black text-black">{predictionResult.predicted_days} Days</span>
               </div>
             </div>
 
             {/* Risk Card */}
-            <div className="bg-white border-2 border-black p-4 rounded-xl flex items-center gap-4 shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-              <div className="w-10 h-10 rounded-lg bg-[#FDE68A] border border-black flex items-center justify-center text-black font-black text-lg">
+            <div className="bg-white border-2 border-black p-3.5 sm:p-4 rounded-xl flex items-center gap-3 sm:gap-4 shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+              <div className="w-10 h-10 rounded-lg bg-[#FDE68A] border border-black flex items-center justify-center text-black font-black text-lg shrink-0">
                 ⚠️
               </div>
               <div>

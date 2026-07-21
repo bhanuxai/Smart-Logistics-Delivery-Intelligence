@@ -131,23 +131,23 @@ export const RouteOptimization = () => {
       `}} />
 
       {/* Title Header */}
-      <div className="flex justify-between items-center border-b-3 border-black pb-4 mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-3 border-black pb-3 sm:pb-4 mb-4 sm:mb-6 gap-2">
         <div>
-          <span className="text-[9px] bg-[#FF9900] text-black border-2 border-black px-2 py-0.5 rounded font-black uppercase tracking-wider mb-2 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+          <span className="text-[8px] sm:text-[9px] bg-[#FF9900] text-black border-2 border-black px-2 py-0.5 rounded font-black uppercase tracking-wider mb-1 sm:mb-2 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
             Logistics AI Engine
           </span>
-          <h2 className="text-xl font-black text-black uppercase tracking-tight flex items-center gap-2">
-            🚚 Route Optimization using Ant Colony Optimization (ACO)
+          <h2 className="text-base sm:text-xl font-black text-black uppercase tracking-tight flex items-center gap-2">
+            🚚 Route Optimization (ACO Engine)
           </h2>
         </div>
       </div>
 
       {/* Main Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         
         {/* ==================== SECTION 1 - Route Configuration ==================== */}
         <div className="lg:col-span-1">
-          <div className="glass-panel p-6 rounded-2xl border-3 border-black bg-white shadow-lg relative overflow-hidden transition-all duration-200">
+          <div className="glass-panel p-4 sm:p-6 rounded-2xl border-3 border-black bg-white shadow-lg relative overflow-hidden transition-all duration-200">
             <div className="absolute top-0 left-0 right-0 h-[5px] bg-[#FF9900]" />
             
             <div className="flex items-center gap-2.5 mb-6 border-b border-slate-200 pb-3">

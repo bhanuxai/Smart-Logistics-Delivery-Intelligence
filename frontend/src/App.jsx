@@ -30,6 +30,7 @@ import {
 function App() {
   const [showConsole, setShowConsole] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Renders different pages based on the selected sidebar item
   const renderContent = () => {
@@ -81,17 +82,27 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#FAF6EE] text-black font-sans relative">
+    <div className="flex min-h-screen md:h-screen w-screen overflow-x-hidden md:overflow-hidden bg-[#FAF6EE] text-black font-sans relative">
       {/* Left Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        sidebarOpen={sidebarOpen} 
+        setSidebarOpen={setSidebarOpen} 
+      />
 
       {/* Right Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10 bg-grid">
+      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden md:overflow-hidden relative z-10 bg-grid">
         {/* Top Navbar */}
-        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Navbar 
+          activeTab={activeTab} 
+          setActiveTab={setActiveTab} 
+          sidebarOpen={sidebarOpen} 
+          setSidebarOpen={setSidebarOpen} 
+        />
 
         {/* Dynamic Page Container */}
-        <main className="flex-1 overflow-y-auto relative flex flex-col">
+        <main className="flex-1 overflow-y-auto relative flex flex-col p-2 sm:p-4 md:p-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -99,7 +110,7 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="flex-1 flex flex-col"
+              className="flex-1 flex flex-col min-w-0"
             >
               {renderContent()}
             </motion.div>

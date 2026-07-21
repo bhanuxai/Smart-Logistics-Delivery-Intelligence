@@ -246,17 +246,17 @@ export const Dashboard = () => {
   }
 
   return (
-    <div className="flex-1 p-6 overflow-y-auto space-y-6 bg-transparent relative z-10">
+    <div className="flex-1 p-3 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6 bg-transparent relative z-10">
       {/* Offline Mode Banner */}
       {isOfflineMode && (
-        <div className="flex items-center justify-between px-4 py-3 bg-[#FEF08A] border-3 border-black text-black rounded-xl text-xs font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] animate-in fade-in slide-in-from-top-1 duration-200">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:px-4 sm:py-3 bg-[#FEF08A] border-3 border-black text-black rounded-xl text-xs font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] gap-2">
           <div className="flex items-center gap-2">
-            <FaDatabase className="animate-pulse text-[#FF9900]" />
+            <FaDatabase className="animate-pulse text-[#FF9900] shrink-0" />
             <span>Currently running in Demo/Offline mode (mock database values displayed).</span>
           </div>
           <button 
             onClick={handleRetry} 
-            className="flex items-center gap-1.5 px-3 py-1 bg-white border-2 border-black hover:bg-[#FF9900] text-black font-black rounded-lg transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1 bg-white border-2 border-black hover:bg-[#FF9900] text-black font-black rounded-lg transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 cursor-pointer shrink-0"
           >
             <FaRedoAlt className="text-[10px]" />
             <span>Try Backend</span>
@@ -265,21 +265,21 @@ export const Dashboard = () => {
       )}
 
       {/* Title Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
         <div>
-          <span className="text-[9px] bg-[#C7D2FE] text-black border-2 border-black px-2 py-0.5 rounded font-black uppercase tracking-wider mb-2 inline-block">Operations Control Room</span>
-          <h2 className="text-xl font-black text-black uppercase tracking-tight">Delivery Intelligence Center</h2>
+          <span className="text-[8px] sm:text-[9px] bg-[#C7D2FE] text-black border-2 border-black px-2 py-0.5 rounded font-black uppercase tracking-wider mb-1 sm:mb-2 inline-block">Operations Control Room</span>
+          <h2 className="text-lg sm:text-xl font-black text-black uppercase tracking-tight">Delivery Intelligence Center</h2>
         </div>
-        <div className="flex items-center gap-2 bg-[#4ADE80] border-3 border-black px-3.5 py-2 rounded-xl text-xs text-black font-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-          <FaCheckCircle className="text-black text-sm" />
+        <div className="flex items-center gap-2 bg-[#4ADE80] border-2 sm:border-3 border-black px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-[10px] sm:text-xs text-black font-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] sm:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+          <FaCheckCircle className="text-black text-xs sm:text-sm shrink-0" />
           <span>System Status: Optimal</span>
         </div>
       </div>
 
       {/* Bento Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-max">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-max">
         {/* Card 1: Total Revenue */}
-        <div className="lg:col-span-1">
+        <div className="col-span-1">
           <KPICard
             title="Total Revenue"
             value={loading ? '' : formatCurrency(kpiData?.total_revenue)}
@@ -291,7 +291,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Card 2: Total Orders */}
-        <div className="lg:col-span-1">
+        <div className="col-span-1">
           <KPICard
             title="Total Orders"
             value={loading ? '' : kpiData?.total_orders?.toLocaleString()}
@@ -303,7 +303,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Revenue Chart (Spans 2 columns and 2 rows on desktop) */}
-        <div className="lg:col-span-2 lg:row-span-2">
+        <div className="col-span-1 sm:col-span-2 lg:row-span-2">
           {loading ? (
             <LoadingSkeleton type="chart" />
           ) : (
@@ -312,7 +312,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Card 3: Total Customers */}
-        <div className="lg:col-span-1">
+        <div className="col-span-1">
           <KPICard
             title="Total Customers"
             value={loading ? '' : kpiData?.total_customers?.toLocaleString()}
@@ -324,7 +324,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Card 4: Total Products */}
-        <div className="lg:col-span-1">
+        <div className="col-span-1">
           <KPICard
             title="Total Products"
             value={loading ? '' : kpiData?.total_products?.toLocaleString()}
@@ -336,7 +336,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Card 5: Total Sellers */}
-        <div className="lg:col-span-1">
+        <div className="col-span-1">
           <KPICard
             title="Total Sellers"
             value={loading ? '' : kpiData?.total_sellers?.toLocaleString()}
@@ -348,7 +348,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Card 6: Average Review */}
-        <div className="lg:col-span-1">
+        <div className="col-span-1">
           <KPICard
             title="Average Review"
             value={loading ? '' : `${formatReview(kpiData?.average_review)} / 5`}
@@ -360,7 +360,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Top Product Categories (Spans 2 columns on desktop) */}
-        <div className="lg:col-span-2">
+        <div className="col-span-1 sm:col-span-2">
           {loading ? (
             <LoadingSkeleton type="chart" />
           ) : (
@@ -369,7 +369,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Top Performing Sellers (Spans 2 columns on desktop) */}
-        <div className="lg:col-span-2">
+        <div className="col-span-1 sm:col-span-2">
           {loading ? (
             <LoadingSkeleton type="chart" />
           ) : (
@@ -378,7 +378,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Payment Methods (Spans 2 columns on desktop) */}
-        <div className="lg:col-span-2">
+        <div className="col-span-1 sm:col-span-2">
           {loading ? (
             <LoadingSkeleton type="doughnut" />
           ) : (
@@ -387,7 +387,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Review Distribution (Spans 2 columns on desktop) */}
-        <div className="lg:col-span-2">
+        <div className="col-span-1 sm:col-span-2">
           {loading ? (
             <LoadingSkeleton type="pie" />
           ) : (
@@ -396,7 +396,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Sales by State (Spans 2 columns on desktop) */}
-        <div className="lg:col-span-2">
+        <div className="col-span-1 sm:col-span-2">
           {loading ? (
             <LoadingSkeleton type="chart" />
           ) : (
@@ -405,7 +405,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Bottom Section: AI Business Insights Panel (Spans full width) */}
-        <div className="lg:col-span-4">
+        <div className="col-span-1 sm:col-span-2 lg:col-span-4">
           {loading ? (
             <LoadingSkeleton type="ai" />
           ) : (
@@ -419,7 +419,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Delivery Prediction ML Model Card (Spans full width) */}
-        <div className="lg:col-span-4">
+        <div className="col-span-1 sm:col-span-2 lg:col-span-4">
           {loading ? (
             <LoadingSkeleton type="ai" />
           ) : (

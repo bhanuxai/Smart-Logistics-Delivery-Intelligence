@@ -253,7 +253,7 @@ export const DemandForecasting = () => {
   const COLORS = ['#FF9900', '#A7F3D0', '#C7D2FE', '#E9D5FF'];
 
   return (
-    <div className="flex-1 p-6 overflow-y-auto space-y-6 bg-transparent text-black font-sans relative z-10">
+    <div className="flex-1 p-3 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6 bg-transparent text-black font-sans relative z-10">
       
       {/* Toast Alert */}
       <AnimatePresence>
@@ -262,7 +262,7 @@ export const DemandForecasting = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-6 right-6 z-50 bg-white border-2 border-black text-black text-xs font-black uppercase px-4 py-3 rounded-xl shadow-[3px_3px_0px_rgba(0,0,0,1)] flex items-center gap-2"
+            className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 bg-white border-2 border-black text-black text-xs font-black uppercase px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl shadow-[3px_3px_0px_rgba(0,0,0,1)] flex items-center gap-2"
           >
             <ShieldCheck className="text-emerald-500 text-base" />
             <span>{toastMessage}</span>
@@ -271,13 +271,13 @@ export const DemandForecasting = () => {
       </AnimatePresence>
 
       {/* Page Title & Subtitle */}
-      <div className="flex justify-between items-center border-b-3 border-black pb-4 mb-6">
+      <div className="flex justify-between items-center border-b-3 border-black pb-3 sm:pb-4 mb-4 sm:mb-6">
         <div>
-          <span className="text-[9px] bg-blue-100 text-black border-2 border-black px-2.5 py-0.5 rounded font-black uppercase tracking-wider mb-2 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+          <span className="text-[8px] sm:text-[9px] bg-blue-100 text-black border-2 border-black px-2 py-0.5 rounded font-black uppercase tracking-wider mb-1 sm:mb-2 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
             Demand Modeler
           </span>
-          <h2 className="text-xl font-black text-black uppercase tracking-tight">Demand Forecasting</h2>
-          <p className="text-xs text-slate-700 font-bold mt-1 max-w-xl leading-relaxed">
+          <h2 className="text-lg sm:text-xl font-black text-black uppercase tracking-tight">Demand Forecasting</h2>
+          <p className="text-xs text-slate-700 font-bold mt-0.5 sm:mt-1 max-w-xl leading-relaxed">
             Predict future product demand using Machine Learning based on historical order patterns.
           </p>
         </div>

@@ -253,7 +253,7 @@ export const Products = () => {
   };
 
   return (
-    <div className="flex-1 p-6 overflow-y-auto space-y-6 bg-transparent text-black font-sans relative z-10">
+    <div className="flex-1 p-3 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6 bg-transparent text-black font-sans relative z-10">
       
       {/* Toast Notification */}
       <AnimatePresence>
@@ -262,7 +262,7 @@ export const Products = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-6 right-6 z-50 bg-white border-2 border-black text-black text-xs font-black uppercase px-4 py-3 rounded-xl shadow-[3px_3px_0px_rgba(0,0,0,1)] flex items-center gap-2"
+            className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 bg-white border-2 border-black text-black text-xs font-black uppercase px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl shadow-[3px_3px_0px_rgba(0,0,0,1)] flex items-center gap-2"
           >
             <Info className="text-blue-500 text-base" />
             <span>{toastMessage}</span>
@@ -271,28 +271,28 @@ export const Products = () => {
       </AnimatePresence>
 
       {/* Page Title & Subtitle */}
-      <div className="flex justify-between items-center border-b-3 border-black pb-4 mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-3 border-black pb-3 sm:pb-4 mb-4 sm:mb-6 gap-3">
         <div>
-          <div className="flex items-center gap-2.5 mb-2">
-            <span className="text-[9px] bg-blue-100 text-black border-2 border-black px-2.5 py-0.5 rounded font-black uppercase tracking-wider inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+          <div className="flex items-center gap-2.5 mb-1.5 sm:mb-2">
+            <span className="text-[8px] sm:text-[9px] bg-blue-100 text-black border-2 border-black px-2.5 py-0.5 rounded font-black uppercase tracking-wider inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
               Products & Cargo Registry
             </span>
             {isOfflineMode && (
-              <span className="text-[9px] bg-amber-100 text-amber-900 border-2 border-amber-500 px-2.5 py-0.5 rounded font-black uppercase tracking-wider inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)] flex items-center gap-1">
+              <span className="text-[8px] sm:text-[9px] bg-amber-100 text-amber-900 border-2 border-amber-500 px-2.5 py-0.5 rounded font-black uppercase tracking-wider inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)] flex items-center gap-1">
                 <AlertCircle className="w-3 h-3" />
                 <span>Offline Fallback</span>
               </span>
             )}
           </div>
-          <h2 className="text-xl font-black text-black uppercase tracking-tight">Products Directory</h2>
-          <p className="text-xs text-slate-700 font-bold mt-1 max-w-xl leading-relaxed">
+          <h2 className="text-lg sm:text-xl font-black text-black uppercase tracking-tight">Products Directory</h2>
+          <p className="text-xs text-slate-700 font-bold mt-0.5 sm:mt-1 max-w-xl leading-relaxed">
             Manage product listings, pricing, cargo dimensions, weights, and detailed stock distributions across regional terminals.
           </p>
         </div>
         <button 
           onClick={fetchProducts} 
           disabled={loading}
-          className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 border-2 border-black text-black rounded-xl text-xs font-black uppercase shadow-[2.5px_2.5px_0px_rgba(0,0,0,1)] transition-all cursor-pointer disabled:opacity-50"
+          className="flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 border-2 border-black text-black rounded-xl text-xs font-black uppercase shadow-[2.5px_2.5px_0px_rgba(0,0,0,1)] transition-all cursor-pointer disabled:opacity-50 shrink-0"
         >
           <RefreshCw className={`text-sm ${loading ? 'animate-spin' : ''}`} />
           <span>Sync Database</span>

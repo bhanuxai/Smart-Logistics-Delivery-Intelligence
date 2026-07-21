@@ -67,29 +67,29 @@ export const AIInsights = ({ dashboardData, monthlySales, topProducts, aiInsight
   ];
 
   return (
-    <div className="glass-panel p-6 md:p-8 rounded-xl relative overflow-hidden bg-grid shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <div className="glass-panel p-4 sm:p-6 md:p-8 rounded-xl relative overflow-hidden bg-grid shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b-3 border-black pb-6 mb-6 relative z-10">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-white border-3 border-black text-black rounded-2xl flex items-center justify-center shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-            <FaBrain className="text-2xl text-[#FF9900]" />
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 sm:gap-4 border-b-3 border-black pb-4 sm:pb-6 mb-4 sm:mb-6 relative z-10">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white border-3 border-black text-black rounded-2xl flex items-center justify-center shadow-[2px_2px_0px_rgba(0,0,0,1)] shrink-0">
+            <FaBrain className="text-xl sm:text-2xl text-[#FF9900]" />
           </div>
           <div>
-            <h3 className="text-base font-black text-black uppercase tracking-tight flex items-center gap-2">
+            <h3 className="text-sm sm:text-base font-black text-black uppercase tracking-tight flex items-center gap-2">
               Logix-AI Decision Intelligence
             </h3>
-            <p className="text-[10px] text-black font-bold mt-0.5">Automated heuristics, trend prediction, and operations recommendations</p>
+            <p className="text-[9px] sm:text-[10px] text-black font-bold mt-0.5">Automated heuristics, trend prediction, and operations recommendations</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-[#C7D2FE] border-2 border-black rounded-xl shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+        <div className="flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-[#C7D2FE] border-2 border-black rounded-xl shadow-[2px_2px_0px_rgba(0,0,0,1)]">
           <FaRobot className="text-black text-xs animate-bounce" />
-          <span className="text-[9px] text-black font-black uppercase tracking-wider">Model: Logix-Cognitive-v4.2</span>
+          <span className="text-[8px] sm:text-[9px] text-black font-black uppercase tracking-wider">Model: Logix-Cognitive-v4.2</span>
         </div>
       </div>
 
       {/* Main AI generated summary placeholder - Yellow Warning box */}
-      <div className="bg-[#FEF08A] border-3 border-black p-5 rounded-2xl mb-6 relative z-10 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-[#FEF08A] border-3 border-black p-3.5 sm:p-5 rounded-2xl mb-4 sm:mb-6 relative z-10 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
         <div className="flex items-center gap-2 text-[10px] font-black text-black mb-2 uppercase tracking-wider">
           <FaShieldAlt className="text-sm" />
           <span>Executive Summary</span>
@@ -106,7 +106,7 @@ export const AIInsights = ({ dashboardData, monthlySales, topProducts, aiInsight
       </div>
 
       {/* Grid containing 4 detailed cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10">
         {insightsList.map((insight, idx) => {
           const Icon = insight.icon;
           return (
@@ -114,14 +114,14 @@ export const AIInsights = ({ dashboardData, monthlySales, topProducts, aiInsight
               key={idx}
               whileHover={{ y: -2 }}
               transition={{ duration: 0.1 }}
-              className={`border-3 border-black rounded-xl p-5 ${insight.bgColor} flex gap-4 transition-all duration-100 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]`}
+              className={`border-3 border-black rounded-xl p-4 sm:p-5 ${insight.bgColor} flex gap-3 sm:gap-4 transition-all duration-100 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]`}
             >
-              <div className={`p-2.5 rounded-xl shrink-0 flex items-center justify-center h-10 w-10 ${insight.iconColor}`}>
-                <Icon className="text-base" />
+              <div className={`p-2 sm:p-2.5 rounded-xl shrink-0 flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 ${insight.iconColor}`}>
+                <Icon className="text-sm sm:text-base" />
               </div>
               <div className="flex-1">
-                <h4 className="text-xs font-black text-black uppercase mb-1.5 tracking-wide">{insight.title}</h4>
-                <p className="text-[11px] text-black font-medium leading-relaxed">{insight.description}</p>
+                <h4 className="text-xs font-black text-black uppercase mb-1 sm:mb-1.5 tracking-wide">{insight.title}</h4>
+                <p className="text-[10px] sm:text-[11px] text-black font-medium leading-relaxed">{insight.description}</p>
               </div>
             </motion.div>
           );

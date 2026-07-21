@@ -71,23 +71,23 @@ export const KPICard = ({
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.15 }}
-      className={`relative ${scheme.bgColor} border-3 border-black rounded-xl p-5 flex flex-col justify-between h-36 transition-all duration-100 ${scheme.border} group overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
+      className={`relative ${scheme.bgColor} border-3 border-black rounded-xl p-3.5 sm:p-5 flex flex-col justify-between min-h-[8.5rem] sm:h-36 transition-all duration-100 ${scheme.border} group overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
     >
       {/* Top Border Line for Accent */}
       <div className={`absolute top-0 left-0 right-0 h-[4px] ${scheme.topLine}`} />
 
-      <div className="flex justify-between items-start z-10">
-        <span className="text-black font-black text-[10px] tracking-wider uppercase">{title}</span>
-        <div className={`p-2 rounded-xl ${scheme.iconBg} transition-transform duration-100 group-hover:scale-105`}>
-          {Icon && <Icon className="text-sm" />}
+      <div className="flex justify-between items-start z-10 gap-2">
+        <span className="text-black font-black text-[9px] sm:text-[10px] tracking-wider uppercase leading-tight">{title}</span>
+        <div className={`p-1.5 sm:p-2 rounded-xl ${scheme.iconBg} transition-transform duration-100 group-hover:scale-105 shrink-0`}>
+          {Icon && <Icon className="text-xs sm:text-sm" />}
         </div>
       </div>
 
       <div className="z-10 mt-1">
-        <h3 className="text-xl font-black text-black tracking-tight leading-none">
+        <h3 className="text-lg sm:text-xl font-black text-black tracking-tight leading-none truncate">
           {value}
         </h3>
-        <p className="text-[10px] text-black font-bold mt-1 leading-normal">
+        <p className="text-[9px] sm:text-[10px] text-black font-bold mt-1 leading-normal">
           {subtitle}
         </p>
       </div>

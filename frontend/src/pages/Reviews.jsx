@@ -149,7 +149,7 @@ const Reviews = () => {
   });
 
   return (
-    <div className="flex-1 p-6 space-y-6 relative max-w-7xl mx-auto w-full">
+    <div className="flex-1 p-3 sm:p-6 space-y-4 sm:space-y-6 relative max-w-7xl mx-auto w-full">
       {/* Toast Notification */}
       <AnimatePresence>
         {toastMessage && (
@@ -157,18 +157,18 @@ const Reviews = () => {
             initial={{ opacity: 0, y: -50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            className="fixed top-24 right-6 z-50 bg-[#A7F3D0] border-3 border-black p-4 rounded-xl shadow-[4px_4px_0px_rgba(0,0,0,1)] flex items-center gap-3"
+            className="fixed top-4 right-4 sm:top-24 sm:right-6 z-50 bg-[#A7F3D0] border-3 border-black p-3 sm:p-4 rounded-xl shadow-[4px_4px_0px_rgba(0,0,0,1)] flex items-center gap-2 sm:gap-3"
           >
-            <div className="w-6 h-6 rounded-full bg-white border border-black flex items-center justify-center text-emerald-600 font-bold">
+            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white border border-black flex items-center justify-center text-emerald-600 font-bold shrink-0">
               <FaCheck className="text-xs" />
             </div>
-            <span className="text-xs font-black text-black uppercase tracking-wide">{toastMessage}</span>
+            <span className="text-[10px] sm:text-xs font-black text-black uppercase tracking-wide">{toastMessage}</span>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Main Header / Summary Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         
         {/* Rating Summary Card */}
         <div className="bg-white border-3 border-black rounded-2xl p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] flex flex-col justify-between md:col-span-1">

@@ -12,11 +12,12 @@ import {
   FaBoxOpen,
   FaStore,
   FaUsers,
-  FaSpinner
+  FaSpinner,
+  FaBars
 } from 'react-icons/fa';
 import apiService from '../services/api';
 
-export const Navbar = ({ activeTab, setActiveTab }) => {
+export const Navbar = ({ activeTab, setActiveTab, sidebarOpen, setSidebarOpen }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false); // Default to light mode for Spatial theme
   
@@ -135,158 +136,162 @@ export const Navbar = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <header className="h-18 bg-white border-3 border-black m-4 mb-0 rounded-2xl flex items-center justify-between px-6 z-30 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200">
-      {/* Search & Location Group */}
-      <div className="flex items-center flex-1 max-w-2xl mr-4">
+    <header className="min-h-[4rem] py-2 bg-white border-3 border-black m-2 sm:m-4 mb-0 rounded-2xl flex flex-wrap items-center justify-between px-3 sm:px-6 z-30 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 gap-2">
+      
+      {/* Mobile Hamburger & Deliver-To Group */}
+      <div className="flex items-center gap-2">
+        {/* Mobile Sidebar Hamburger Toggle */}
+        <button
+          onClick={() => setSidebarOpen && setSidebarOpen(!sidebarOpen)}
+          className="md:hidden p-2 rounded-xl border-2 border-black bg-[#FF9900] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#E48A00] cursor-pointer shrink-0"
+          aria-label="Toggle Navigation Drawer"
+        >
+          <FaBars className="text-base" />
+        </button>
+
         {/* Amazon Location Selector - Neo-Brutalist Cyan */}
-        <div className="flex items-center gap-2 cursor-pointer text-black py-1.5 px-3 bg-[#22D3EE] border-3 border-black rounded-xl mr-4 shrink-0 text-xs shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all group">
+        <div className="hidden sm:flex items-center gap-2 cursor-pointer text-black py-1.5 px-3 bg-[#22D3EE] border-3 border-black rounded-xl shrink-0 text-xs shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all group">
           <FaTruck className="text-black text-sm shrink-0 group-hover:scale-110 transition-transform" />
           <div className="leading-tight text-left">
             <div className="text-[8px] font-black text-black uppercase tracking-wider">Deliver to</div>
             <div className="font-black text-black">São Paulo Hub</div>
           </div>
         </div>
+      </div>
 
-        {/* Amazon-style Search Bar - Neo-Brutalist */}
-        <div className="flex-1 flex items-center max-w-xl relative">
-          {/* Category Dropdown */}
-          <div className="h-9 px-3 bg-white border-3 border-r-0 border-black rounded-l-xl flex items-center gap-1.5 text-[10px] text-black font-black select-none cursor-pointer transition-colors shrink-0">
-            <span>Cargo</span>
-            <FaAngleDown className="text-[9px]" />
-          </div>
-          {/* Search Input */}
-          <div className="relative flex-1">
-            <input
-              type="text"
-              placeholder="Search cargo, shipments, sellers or hubs..."
-              value={searchVal}
-              onChange={(e) => setSearchVal(e.target.value)}
-              onFocus={() => { if (searchVal.trim().length >= 2) setShowSearchDropdown(true); }}
-              className="w-full h-9 pl-4 pr-12 bg-white border-3 border-black text-xs text-black placeholder-slate-500 font-bold focus:outline-none"
-            />
-            {isSearching ? (
-              <div className="absolute right-3.5 top-1/2 -translate-y-1/2">
-                <FaSpinner className="animate-spin text-xs text-slate-500" />
-              </div>
-            ) : (
-              <div className="absolute right-3.5 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-slate-100 border-2 border-black rounded text-[9px] text-black font-black select-none">
-                Ctrl+K
-              </div>
-            )}
-          </div>
-          {/* Search Button */}
-          <button className="h-9 w-12 bg-[#FF9900] text-black border-3 border-l-0 border-black rounded-r-xl flex items-center justify-center cursor-pointer shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all active:translate-x-0.5 active:translate-y-0.5">
-            <FaSearch className="text-sm" />
-          </button>
-
-          {/* Autocomplete Dropdown overlay */}
-          {showSearchDropdown && (
-            <>
-              {/* Click-away backdrop */}
-              <div 
-                className="fixed inset-0 z-40 bg-transparent" 
-                onClick={() => setShowSearchDropdown(false)}
-              />
-              {/* Dropdown Card */}
-              <div className="absolute top-11 left-0 right-0 bg-white border-3 border-black rounded-xl shadow-[4px_4px_0px_rgba(0,0,0,1)] z-50 p-4 max-h-96 overflow-y-auto space-y-4">
-                
-                {/* Orders / Shipments Group */}
-                {searchResults.orders.length > 0 && (
-                  <div className="space-y-1.5">
-                    <div className="text-[8px] font-black uppercase text-slate-500 tracking-widest border-b border-dashed border-slate-200 pb-1">
-                      Active Shipments
-                    </div>
-                    {searchResults.orders.map((o) => (
-                      <div
-                        key={o.id}
-                        onClick={() => handleResultClick('payments', o.id)}
-                        className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-black cursor-pointer transition-all text-xs font-bold text-black"
-                      >
-                        <div className="flex items-center gap-2 truncate">
-                          <FaBoxOpen className="text-[#FF9900] shrink-0" />
-                          <span className="font-mono truncate">{o.id}</span>
-                        </div>
-                        <span className="text-[8px] font-black uppercase px-1.5 py-0.5 bg-yellow-100 border border-black rounded">
-                          {o.status}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Sellers Group */}
-                {searchResults.sellers.length > 0 && (
-                  <div className="space-y-1.5">
-                    <div className="text-[8px] font-black uppercase text-slate-500 tracking-widest border-b border-dashed border-slate-200 pb-1">
-                      Sellers
-                    </div>
-                    {searchResults.sellers.map((s) => (
-                      <div
-                        key={s.id}
-                        onClick={() => handleResultClick('sellers', s.id)}
-                        className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-black cursor-pointer transition-all text-xs font-bold text-black"
-                      >
-                        <div className="flex items-center gap-2 truncate">
-                          <FaStore className="text-cyan-500 shrink-0" />
-                          <span className="font-mono truncate">{s.id}</span>
-                        </div>
-                        <span className="text-[8px] text-slate-500 shrink-0 font-black capitalize">
-                          {s.city}, {s.state}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Customers Group */}
-                {searchResults.customers.length > 0 && (
-                  <div className="space-y-1.5">
-                    <div className="text-[8px] font-black uppercase text-slate-500 tracking-widest border-b border-dashed border-slate-200 pb-1">
-                      Customers / Receivers
-                    </div>
-                    {searchResults.customers.map((c) => (
-                      <div
-                        key={c.id}
-                        onClick={() => handleResultClick('customers', c.id)}
-                        className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-black cursor-pointer transition-all text-xs font-bold text-black"
-                      >
-                        <div className="flex items-center gap-2 truncate">
-                          <FaUsers className="text-purple-500 shrink-0" />
-                          <span className="font-mono truncate">{c.id}</span>
-                        </div>
-                        <span className="text-[8px] text-slate-500 shrink-0 font-black capitalize">
-                          {c.city}, {c.state}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {searchResults.orders.length === 0 && searchResults.sellers.length === 0 && searchResults.customers.length === 0 && (
-                  <div className="text-center py-4 text-xs font-bold text-slate-500">
-                    No results match "{searchVal}"
-                  </div>
-                )}
-                
-              </div>
-            </>
-          )}
-
+      {/* Amazon-style Search Bar - Responsive */}
+      <div className="flex-1 flex items-center max-w-xl relative min-w-[140px] order-3 lg:order-2">
+        {/* Category Dropdown */}
+        <div className="hidden xs:flex h-9 px-2 sm:px-3 bg-white border-3 border-r-0 border-black rounded-l-xl items-center gap-1 text-[10px] text-black font-black select-none cursor-pointer transition-colors shrink-0">
+          <span>Cargo</span>
+          <FaAngleDown className="text-[9px]" />
         </div>
+
+        {/* Search Input */}
+        <div className="relative flex-1">
+          <input
+            type="text"
+            placeholder="Search cargo, sellers..."
+            value={searchVal}
+            onChange={(e) => setSearchVal(e.target.value)}
+            onFocus={() => { if (searchVal.trim().length >= 2) setShowSearchDropdown(true); }}
+            className="w-full h-9 pl-3 pr-8 sm:pr-12 bg-white border-3 border-black xs:rounded-l-none rounded-l-xl text-xs text-black placeholder-slate-500 font-bold focus:outline-none"
+          />
+          {isSearching ? (
+            <div className="absolute right-2 sm:right-3.5 top-1/2 -translate-y-1/2">
+              <FaSpinner className="animate-spin text-xs text-slate-500" />
+            </div>
+          ) : (
+            <div className="hidden sm:block absolute right-3.5 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-slate-100 border-2 border-black rounded text-[9px] text-black font-black select-none">
+              Ctrl+K
+            </div>
+          )}
+        </div>
+
+        {/* Search Button */}
+        <button className="h-9 w-10 sm:w-12 bg-[#FF9900] text-black border-3 border-l-0 border-black rounded-r-xl flex items-center justify-center cursor-pointer shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all shrink-0">
+          <FaSearch className="text-xs sm:text-sm" />
+        </button>
+
+        {/* Autocomplete Dropdown overlay */}
+        {showSearchDropdown && (
+          <>
+            <div 
+              className="fixed inset-0 z-40 bg-transparent" 
+              onClick={() => setShowSearchDropdown(false)}
+            />
+            <div className="absolute top-11 left-0 right-0 bg-white border-3 border-black rounded-xl shadow-[4px_4px_0px_rgba(0,0,0,1)] z-50 p-3 sm:p-4 max-h-80 overflow-y-auto space-y-3">
+              {searchResults.orders.length > 0 && (
+                <div className="space-y-1">
+                  <div className="text-[8px] font-black uppercase text-slate-500 tracking-widest border-b border-dashed border-slate-200 pb-1">
+                    Active Shipments
+                  </div>
+                  {searchResults.orders.map((o) => (
+                    <div
+                      key={o.id}
+                      onClick={() => handleResultClick('payments', o.id)}
+                      className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-black cursor-pointer transition-all text-xs font-bold text-black"
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <FaBoxOpen className="text-[#FF9900] shrink-0" />
+                        <span className="font-mono truncate">{o.id}</span>
+                      </div>
+                      <span className="text-[8px] font-black uppercase px-1.5 py-0.5 bg-yellow-100 border border-black rounded">
+                        {o.status}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {searchResults.sellers.length > 0 && (
+                <div className="space-y-1">
+                  <div className="text-[8px] font-black uppercase text-slate-500 tracking-widest border-b border-dashed border-slate-200 pb-1">
+                    Sellers
+                  </div>
+                  {searchResults.sellers.map((s) => (
+                    <div
+                      key={s.id}
+                      onClick={() => handleResultClick('sellers', s.id)}
+                      className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-black cursor-pointer transition-all text-xs font-bold text-black"
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <FaStore className="text-cyan-500 shrink-0" />
+                        <span className="font-mono truncate">{s.id}</span>
+                      </div>
+                      <span className="text-[8px] text-slate-500 shrink-0 font-black capitalize">
+                        {s.city}, {s.state}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {searchResults.customers.length > 0 && (
+                <div className="space-y-1">
+                  <div className="text-[8px] font-black uppercase text-slate-500 tracking-widest border-b border-dashed border-slate-200 pb-1">
+                    Customers
+                  </div>
+                  {searchResults.customers.map((c) => (
+                    <div
+                      key={c.id}
+                      onClick={() => handleResultClick('customers', c.id)}
+                      className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-black cursor-pointer transition-all text-xs font-bold text-black"
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <FaUsers className="text-purple-500 shrink-0" />
+                        <span className="font-mono truncate">{c.id}</span>
+                      </div>
+                      <span className="text-[8px] text-slate-500 shrink-0 font-black capitalize">
+                        {c.city}, {c.state}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {searchResults.orders.length === 0 && searchResults.sellers.length === 0 && searchResults.customers.length === 0 && (
+                <div className="text-center py-3 text-xs font-bold text-slate-500">
+                  No results match "{searchVal}"
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-3 order-2 lg:order-3">
         {/* Dark/Light Toggle */}
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="p-2 rounded-xl border-3 border-black bg-white text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center justify-center relative cursor-pointer"
+          className="p-2 rounded-xl border-2 sm:border-3 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center justify-center relative cursor-pointer"
           title="Toggle Theme"
         >
           {isDarkMode ? (
-            <FaMoon className="text-black text-sm" />
+            <FaMoon className="text-black text-xs sm:text-sm" />
           ) : (
-            <FaSun className="text-[#FF9900] text-sm" />
+            <FaSun className="text-[#FF9900] text-xs sm:text-sm" />
           )}
         </button>
 
@@ -294,28 +299,28 @@ export const Navbar = ({ activeTab, setActiveTab }) => {
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="p-2 rounded-xl border-3 border-black bg-white text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center justify-center relative cursor-pointer"
+            className="p-2 rounded-xl border-2 sm:border-3 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center justify-center relative cursor-pointer"
           >
-            <FaBell className="text-black text-sm" />
-            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-rose-500 border-2 border-black rounded-full"></span>
+            <FaBell className="text-black text-xs sm:text-sm" />
+            <span className="absolute top-1 right-1 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-rose-500 border-2 border-black rounded-full"></span>
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 mt-3 w-80 bg-white border-3 border-black rounded-xl shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] overflow-hidden z-40">
-              <div className="p-4 border-b-3 border-black bg-yellow-100 flex justify-between items-center">
+            <div className="absolute right-0 mt-3 w-72 sm:w-80 bg-white border-3 border-black rounded-xl shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] overflow-hidden z-40">
+              <div className="p-3 sm:p-4 border-b-3 border-black bg-yellow-100 flex justify-between items-center">
                 <span className="text-[10px] font-black uppercase text-black tracking-wider">Fleet Alerts</span>
                 <span className="text-[10px] text-black hover:underline cursor-pointer font-black">Mark all read</span>
               </div>
-              <div className="max-h-80 overflow-y-auto">
+              <div className="max-h-72 overflow-y-auto">
                 {notifications.map((n) => {
                   const Icon = n.icon;
                   return (
                     <div
                       key={n.id}
-                      className="p-4 border-b-2 border-black hover:bg-slate-50 transition-colors flex gap-3 cursor-pointer"
+                      className="p-3 sm:p-4 border-b-2 border-black hover:bg-slate-50 transition-colors flex gap-2.5 cursor-pointer"
                     >
-                      <div className="p-2 rounded-lg shrink-0 flex items-center justify-center h-8 w-8 border-2 border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] bg-slate-50 text-black">
-                        <Icon className="text-sm" />
+                      <div className="p-1.5 rounded-lg shrink-0 flex items-center justify-center h-7 w-7 border-2 border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] bg-slate-50 text-black">
+                        <Icon className="text-xs" />
                       </div>
                       <div className="flex-1">
                         <p className="text-xs text-black font-black leading-normal">{n.message}</p>
@@ -335,21 +340,21 @@ export const Navbar = ({ activeTab, setActiveTab }) => {
         {/* User Profile */}
         <div 
           onClick={() => setActiveTab('profile')}
-          className={`flex items-center gap-3 pl-2 border-l-3 border-black cursor-pointer group transition-all`}
+          className={`flex items-center gap-2 pl-2 border-l-2 sm:border-l-3 border-black cursor-pointer group transition-all`}
         >
-          <div className="text-right">
+          <div className="hidden sm:block text-right">
             <div className="text-xs font-black text-black group-hover:text-[#FF9900] transition-colors">{profileName}</div>
             <div className="text-[8px] text-black bg-[#FF9900] border-2 border-black px-1.5 py-0.5 rounded font-black tracking-wider uppercase inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
               {profileRole}
             </div>
           </div>
-          <button className={`flex items-center gap-1.5 p-1 rounded-xl border-2 transition-all cursor-pointer ${
+          <button className={`flex items-center gap-1 p-1 rounded-xl border-2 transition-all cursor-pointer ${
             activeTab === 'profile' ? 'bg-slate-100 border-black' : 'border-transparent group-hover:border-black group-hover:bg-slate-100'
           }`}>
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-[#FF9900] to-amber-400 border-2 border-black flex items-center justify-center text-black text-sm font-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-tr from-[#FF9900] to-amber-400 border-2 border-black flex items-center justify-center text-black text-xs sm:text-sm font-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">
               {profileInitials}
             </div>
-            <FaAngleDown className="text-black text-xs" />
+            <FaAngleDown className="text-black text-xs hidden xs:block" />
           </button>
         </div>
       </div>
