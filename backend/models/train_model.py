@@ -1,26 +1,37 @@
+import os
 import pandas as pd
 import joblib
-import os
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
 from urllib.parse import quote_plus
+from sqlalchemy import create_engine
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
-load_dotenv()
+
 # ===================================
-# DATABASE CONFIGURATION
+# LOAD ENVIRONMENT VARIABLES
 # ===================================
 
-DB_USER = "root"
+load_dotenv()
+
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "3306")
+DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = "localhost"
-DB_PORT = "3306"
-DB_NAME = "smart_logistics_db"
+DB_NAME = os.getenv("DB_NAME", "smart_logistics_db")
+
+if not DB_PASSWORD:
+    raise ValueError("❌ DB_PASSWORD not found in .env file")
+
+encoded_password = quote_plus(DB_PASSWORD)
+
+# ===================================
+# DATABASE CONNECTION
+# ===================================
 
 engine = create_engine(
-    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    f"mysql+pymysql://{DB_USER}:{encoded_password}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
 
 print("✅ Connected Successfully")
@@ -66,7 +77,8 @@ AND o.order_purchase_timestamp IS NOT NULL;
 
 df = pd.read_sql(query, engine)
 
-print(f"\nDataset Loaded : {df.shape}")
+print(f"\n✅ Dataset Loaded Successfully")
+print(f"Dataset Shape : {df.shape}")
 
 # ===================================
 # DATA CLEANING
@@ -96,7 +108,7 @@ for col in categorical_columns:
 # FEATURES
 # ===================================
 
-X = df.drop("delivery_days", axis=1)
+X = df.drop(columns=["delivery_days"])
 y = df["delivery_days"]
 
 # ===================================
@@ -114,10 +126,14 @@ X_train, X_test, y_train, y_test = train_test_split(
 # TRAIN MODEL
 # ===================================
 
-print("\nTraining Random Forest...")
+print("\n🚀 Training Random Forest...")
 
 model = RandomForestRegressor(
     n_estimators=100,
+    max_depth=20,
+    min_samples_split=10,
+    min_samples_leaf=5,
+    max_features="sqrt",
     random_state=42,
     n_jobs=-1
 )
@@ -143,8 +159,17 @@ print(f"R² Score            : {r2:.4f}")
 # SAVE MODEL
 # ===================================
 
-joblib.dump(model, "delivery_model.pkl")
-joblib.dump(encoders, "label_encoders.pkl")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+joblib.dump(
+    model,
+    os.path.join(current_dir, "delivery_model.pkl")
+)
+
+joblib.dump(
+    encoders,
+    os.path.join(current_dir, "label_encoders.pkl")
+)
 
 print("\n✅ delivery_model.pkl Saved")
 print("✅ label_encoders.pkl Saved")
