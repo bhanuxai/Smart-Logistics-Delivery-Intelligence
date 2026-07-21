@@ -1,0 +1,11 @@
+Flask
+flask-cors
+SQLAlchemy
+PyMySQL
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+google-generativeai
+python-dotenv

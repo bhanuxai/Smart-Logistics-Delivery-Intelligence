@@ -1,0 +1,30 @@
+# Dependency directories
+node_modules/
+venv/
+env/
+
+# Environment configurations
+.env
+.env.*
+!.env.example
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build and distribution output directories
+dist/
+build/
+out/
+
+# System and logs
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Large files (ML models & dataset CSVs)
+*.pkl
+*.csv
