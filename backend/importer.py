@@ -15,7 +15,8 @@ INSERT INTO order_items (
     product_id,
     seller_id,
     shipping_limit_date,
-    price
+    price,
+    freight_value
 )
 VALUES (%s,%s,%s,%s,%s,%s,%s)
 """
