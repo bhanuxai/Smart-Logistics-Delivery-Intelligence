@@ -14,8 +14,11 @@ import {
   FaSave,
   FaHistory
 } from 'react-icons/fa';
+import { useTheme } from '../context/ThemeContext';
 
 const Settings = () => {
+
+  const { uiTheme, changeUiTheme } = useTheme();
   // Load settings from localStorage or fallback
   const [settings, setSettings] = useState(() => {
     const saved = localStorage.getItem('fleet_settings');
@@ -345,13 +348,17 @@ const Settings = () => {
                         <button
                           key={theme.id}
                           type="button"
-                          onClick={() => setEditedSettings({ ...editedSettings, uiTheme: theme.id })}
+                          onClick={() => {
+                            setEditedSettings({ ...editedSettings, uiTheme: theme.id });
+                            changeUiTheme(theme.id);
+                          }}
                           className={`p-3.5 rounded-xl border-2 text-[10px] font-black uppercase tracking-wide text-center cursor-pointer transition-all shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 ${
                             editedSettings.uiTheme === theme.id ? 'ring-3 ring-black ring-offset-2' : ''
                           } ${theme.color}`}
                         >
                           {theme.name}
                         </button>
+
                       ))}
                     </div>
                   </div>

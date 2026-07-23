@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply bg-[#FAF6EE] text-black antialiased;
+    @apply bg-[#FAF6EE] text-black antialiased transition-colors duration-200;
     font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 }
@@ -93,4 +93,144 @@
 .brutalist-btn:active {
   transform: translate(1px, 1px);
   box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 1);
+}
+
+/* ==========================================================================
+   DARK MODE & PALETTE THEME STYLES
+   ========================================================================== */
+
+html.dark body {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+html.dark .bg-\[\#FAF6EE\] {
+  background-color: #0F172A !important;
+}
+
+html.dark .bg-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0F172A;
+  border-left: 3px solid #334155;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border: 2px solid #0F172A;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+html.dark .glass-panel,
+html.dark .bento-card {
+  background-color: #1E293B !important;
+  border-color: #475569 !important;
+  color: #F8FAFC !important;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.dark .glass-panel:hover,
+html.dark .bento-card:hover {
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.8) !important;
+}
+
+html.dark aside {
+  background-color: #1E293B !important;
+  border-color: #475569 !important;
+}
+
+html.dark header,
+html.dark nav {
+  background-color: #1E293B !important;
+}
+
+html.dark .bg-white {
+  background-color: #1E293B !important;
+  color: #F8FAFC !important;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-100 {
+  background-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+html.dark .bg-slate-200 {
+  background-color: #475569 !important;
+  color: #F8FAFC !important;
+}
+
+html.dark .text-black {
+  color: #F8FAFC !important;
+}
+
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: #E2E8F0 !important;
+}
+
+html.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+
+html.dark .border-black {
+  border-color: #475569 !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+  border-color: #475569 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748B !important;
+}
+
+/* Recharts Dark Mode SVG Customization */
+html.dark .recharts-cartesian-axis-tick text {
+  fill: #94A3B8 !important;
+}
+
+html.dark .recharts-cartesian-grid line {
+  stroke: #334155 !important;
+}
+
+html.dark .recharts-default-tooltip {
+  background-color: #1E293B !important;
+  border-color: #475569 !important;
+  color: #F8FAFC !important;
+}
+
+/* Electric Cyan Theme Overrides */
+html[data-theme="electric"] body {
+  background-color: #ECFEFF !important;
+}
+html[data-theme="electric"] .bg-\[\#FAF6EE\] {
+  background-color: #ECFEFF !important;
+}
+
+/* Toxic Terminal Theme Overrides */
+html[data-theme="toxic"] body {
+  background-color: #ECFDF5 !important;
+}
+html[data-theme="toxic"] .bg-\[\#FAF6EE\] {
+  background-color: #ECFDF5 !important;
 }

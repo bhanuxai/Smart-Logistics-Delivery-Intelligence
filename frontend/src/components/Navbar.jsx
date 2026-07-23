@@ -16,10 +16,11 @@ import {
   FaBars
 } from 'react-icons/fa';
 import apiService from '../services/api';
+import { useTheme } from '../context/ThemeContext';
 
 export const Navbar = ({ activeTab, setActiveTab, sidebarOpen, setSidebarOpen }) => {
   const [showNotifications, setShowNotifications] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); // Default to light mode for Spatial theme
+  const { isDarkMode, toggleDarkMode } = useTheme();
   
   // Reactive profile state from localStorage
   const [profileName, setProfileName] = useState('Bhanu');
@@ -284,16 +285,17 @@ export const Navbar = ({ activeTab, setActiveTab, sidebarOpen, setSidebarOpen })
       <div className="flex items-center gap-2 sm:gap-3 order-2 lg:order-3">
         {/* Dark/Light Toggle */}
         <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="p-2 rounded-xl border-2 sm:border-3 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center justify-center relative cursor-pointer"
-          title="Toggle Theme"
+          onClick={toggleDarkMode}
+          className="p-2 rounded-xl border-2 sm:border-3 border-black dark:border-white bg-white dark:bg-slate-800 text-black dark:text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center justify-center relative cursor-pointer"
+          title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
           {isDarkMode ? (
-            <FaMoon className="text-black text-xs sm:text-sm" />
+            <FaSun className="text-yellow-400 text-xs sm:text-sm animate-pulse" />
           ) : (
-            <FaSun className="text-[#FF9900] text-xs sm:text-sm" />
+            <FaMoon className="text-slate-800 text-xs sm:text-sm" />
           )}
         </button>
+
 
         {/* Notifications Dropdown Toggle */}
         <div className="relative">
