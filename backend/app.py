@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS #Cross-Origin Resource Sharing
 
 from routes.dashboard import dashboard_bp
 from routes.analytics import analytics_bp

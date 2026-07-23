@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
 DB_CONFIG = {
@@ -11,5 +10,4 @@ DB_CONFIG = {
     "database": os.getenv("DB_NAME", "smart_logistics_db"),
     "port": int(os.getenv("DB_PORT", 3306))
 }
-
 SECRET_KEY = os.getenv("SECRET_KEY")
