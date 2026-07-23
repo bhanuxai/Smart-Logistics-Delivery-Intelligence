@@ -367,6 +367,7 @@ def generate_report():
     
     cursor.execute("SELECT ROUND(AVG(review_score),2) AS rating FROM reviews")
     rating = cursor.fetchone()["rating"]
+    rating_text = f"{rating:.2f}" if rating is not None else "N/A"
     
     cursor.execute("""
         SELECT
@@ -402,7 +403,7 @@ def generate_report():
 You are a Logistics Operations Director. Write a comprehensive Weekly Logistics Report based on the following weekly operational metrics:
 Total Invoiced Revenue: ${revenue:,.2f}
 Total Orders Dispatched: {orders:,}
-Average Review Score: {rating:.2f} / 5.00
+Average Review Score: {rating_text} / 5.00
 Top Categories by Revenue: {top_categories}
 Top Customer States: {top_states}
 
